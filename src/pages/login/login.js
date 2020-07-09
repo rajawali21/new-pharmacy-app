@@ -24,7 +24,7 @@ const Login = () => {
                     <LoginFormCard />
                 </div>
             </main>
-            <Footer />
+            <Footer isAbsolute />
         </div>
     )
 }

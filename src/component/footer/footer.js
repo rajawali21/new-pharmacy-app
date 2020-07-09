@@ -1,8 +1,8 @@
 import React from 'react';
 import './footer.css';
 
-const Footer = () => (
-    <footer className='footer'>
+const Footer = ({ isAbsolute }) => (
+    <footer className={`footer ${isAbsolute && 'absolute'}`}>
         <p>Copyright &copy; 2020 - Pharmacy App</p>
     </footer>
 )
