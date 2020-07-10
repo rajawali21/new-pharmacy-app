@@ -1,0 +1,25 @@
+.request-button {
+    width: 21rem;
+    height: 17rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 1px 2px 3px 0px, rgba(60, 64, 67, 0.3) -2px -1px 3px 0px;
+    border-radius: 10px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+.request-button span {
+    font-size: 2rem;
+}
+
+.request-button p {
+    margin-top: 20px;
+}
+
+.request-button:hover {
+        background-color: #f4f4f4;
+}

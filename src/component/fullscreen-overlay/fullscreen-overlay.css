@@ -1,0 +1,10 @@
+.fullscreen-overlay {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+}

@@ -3,6 +3,8 @@ import './officerhome.css';
 import HeaderOfficer from '../../component/header-oficer/header-officer';
 import Footer from '../../component/footer/footer';
 import OfficerHomeIllustration from '../../assets/illustration/illustration-2.png';
+import RequestButtonGroup from '../../component/request-button-group/request-button-group';
+import FullscreenOverlay from '../../component/fullscreen-overlay/fullscreen-overlay';
 
 const OfficerHome = () => (
     <div>
@@ -15,8 +17,11 @@ const OfficerHome = () => (
                 </div>
                 <img src={OfficerHomeIllustration} alt='OficerHomeIllustration' />
             </section>
-            <section className='menu'></section>
+            <RequestButtonGroup />
         </div>
+        <FullscreenOverlay>
+
+        </FullscreenOverlay>
         <Footer />
     </div>
 )

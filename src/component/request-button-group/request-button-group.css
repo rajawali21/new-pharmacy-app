@@ -1,0 +1,10 @@
+.request-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    padding: 30px 20px;
+}
+
