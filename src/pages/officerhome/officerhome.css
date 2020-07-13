@@ -41,3 +41,9 @@
     right: 15%;
     bottom: -10%;
 }
+
+.officerhome .button-group {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}

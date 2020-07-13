@@ -17,7 +17,7 @@
 }
 
 .header-officer .left-side {
-    width: 85%;
+    width: 80%;
     height: 100%;
     display: flex;
     justify-content: flex-start;
@@ -65,7 +65,7 @@
 
 
 .header-officer .right-side {
-    width: 15%;
+    width: 20%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -89,4 +89,8 @@
 
 .header-officer .right-side .officer-name {
     padding-right: 0.4rem;
+}
+
+.header-officer .right-side .arrow-down {
+    padding-bottom: 0.5rem;
 }

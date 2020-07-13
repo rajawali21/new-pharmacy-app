@@ -1,0 +1,13 @@
+.custom-button {
+  background-color: #40BCFB;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.4rem;
+  margin: 0.8rem;
+  cursor: pointer;
+}
+
+.custom-button.dark {
+    background-color: #333;
+}

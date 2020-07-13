@@ -7,4 +7,11 @@
     left: 0;
     top: 0;
     background-color: #fff;
+    z-index: 3;
+    left: -100vw;
+    transition: all 500ms ease-in-out;
+}
+
+.fullscreen-overlay.active {
+    left: 0;
 }

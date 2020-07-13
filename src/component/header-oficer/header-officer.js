@@ -25,7 +25,7 @@ const HeaderOfficer = () => (
                 <span><i className='fas fa-bell'></i></span>
                 <img src={Logo} alt='UserImage' />
                 <span className='officer-name'>Bahrul Ulum</span>
-                <span><i className='fas fa-sort-down'></i></span>
+                <span><i className='fas fa-sort-down arrow-down'></i></span>
             </div>
         </header>
     </div>
