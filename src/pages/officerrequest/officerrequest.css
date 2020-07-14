@@ -1,0 +1,15 @@
+.officer-request {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.officer-request .left-side {
+    width: 70%;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    padding-top: 6rem;
+}
+
+

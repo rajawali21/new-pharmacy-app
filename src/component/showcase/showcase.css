@@ -1,0 +1,37 @@
+.showcase {
+    height: 65vh;
+    background-color: #40BCFB;
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.showcase .showcase-text {
+    width: 40%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+.showcase .showcase-text h1 {
+    font-size: 3rem;
+    line-height: 1.3;
+    padding-bottom: 10px;
+}
+
+.showcase .showcase-text p {
+    font-size: 1.3rem;
+}
+
+.showcase img {
+    position: absolute;
+    right: 15%;
+    bottom: -10%;
+}

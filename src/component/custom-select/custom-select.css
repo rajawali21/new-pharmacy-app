@@ -1,4 +1,4 @@
-.custom-input {
+.custom-select {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #cccccc;
@@ -6,14 +6,14 @@
     margin-bottom: 10px;
 }
 
-.custom-input.three {
+.custom-select.three {
     width: 30%;
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 0;
 }
 
-.custom-input.five {
+.custom-select.five {
     width: 50%;
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 0;
 }
