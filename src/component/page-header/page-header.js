@@ -4,13 +4,13 @@ import './page-header.css';
 // Other Component
 import CustomButton from '../../component/custom-button/custom-button';
 
-const PageHeader = ({ title, handleClick }) => {
+const PageHeader = ({ title, onClick }) => {
     return (
         <div className='page-header'>
             <div className='page-title'>
                 <p className='title'>Home {' > '} Request</p>
                 <div className='line' />
-                <CustomButton color='outline-primary' value='Tambah Request' onClick={handleClick} />
+                <CustomButton color='outline-primary' value='Tambah Request' onClick={onClick} />
             </div>
             <div className='page-heading'>
                 <h1>Request Directory</h1>

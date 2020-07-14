@@ -1,7 +1,8 @@
 import toggleActionTypes from './toggle.types';
 
 const INITIAL_STATE = {
-    toggleOverlay: false
+    toggleOverlay: false,
+    toggleRightDetail: false
 }
 
 const toggleReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,12 @@ const toggleReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 toggleOverlay: !state.toggleOverlay
+            }
+
+        case toggleActionTypes.TOGGLE_RIGHT_DETAIL:
+            return {
+                ...state,
+                toggleRightDetail: !state.toggleRightDetail
             }
 
         default:

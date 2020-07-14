@@ -1,30 +1,36 @@
 import React from 'react';
 import './officerrequest.css';
 
+// Other Component
 import HeaderOfficer from '../../component/header-oficer/header-officer';
 import Footer from '../../component/footer/footer';
 import PageHeader from '../../component/page-header/page-header';
 import SectionSeparator from '../../component/section-separator/section-separator';
 import TableHeader from '../../component/table-header/table-header';
 import RequestOverlay from '../../component/request-overlay/request-overlay';
+import TableData from '../../component/table-data/table-data';
+import SampleImage from '../../assets/sample/officer-1.jpg';
 
 // Redux
 import { connect } from 'react-redux';
-import { toggleOverlay } from '../../redux/toggle/toggle.action';
-import TableData from '../../component/table-data/table-data';
+import { toggleOverlay, toggleRightDetail } from '../../redux/toggle/toggle.action';
+import RightDetail from '../../component/right-detail/right-detail';
 
-const OfficerRequest = ({ toggleOverlay }) => {
+const OfficerRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail }) => {
     return (
         <React.Fragment>
             <HeaderOfficer />
             <div className='officer-request'>
-                <div className='left-side'>
-                    <PageHeader handleClick={() => toggleOverlay()} />
+                <div className={`left-side ${stateRightDefail && 'minified'}`}>
+                    <PageHeader onClick={() => toggleOverlay()} />
                     <SectionSeparator />
                     <TableHeader items={['No', 'Requestor', 'Tanggal', 'Jam', 'Status', 'Detail']} />
-                    <TableData />
+                    <TableData onClick={() => toggleRightDetail()} incDetail />
                 </div>
-                <aside className='right-side'></aside>
+                <RightDetail image={SampleImage} active={stateRightDefail}>
+                    <TableHeader items={['No', 'Obat', 'Jumlah']} />
+                    <TableData />
+                </RightDetail>
             </div>
             <RequestOverlay />
             <Footer isAbsolute />
@@ -32,8 +38,13 @@ const OfficerRequest = ({ toggleOverlay }) => {
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    toggleOverlay: () => dispatch(toggleOverlay())
+const mapStateToProps = state => ({
+    stateRightDefail: state.toggle.toggleRightDetail
 })
 
-export default connect(null, mapDispatchToProps)(OfficerRequest);
+const mapDispatchToProps = dispatch => ({
+    toggleOverlay: () => dispatch(toggleOverlay()),
+    toggleRightDetail: () => dispatch(toggleRightDetail())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(OfficerRequest);
