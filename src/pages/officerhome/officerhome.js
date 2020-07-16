@@ -2,9 +2,9 @@ import React from 'react';
 import './officerhome.css';
 
 // Other Library
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleOverlay } from '../../redux/toggle/toggle.action';
-import { withRouter } from 'react-router-dom';
 
 // Other Components
 import HeaderOfficer from '../../component/header-oficer/header-officer';
@@ -15,7 +15,16 @@ import RequestButton from '../../component/request-button/request-button';
 import RequestOverlay from '../../component/request-overlay/request-overlay';
 import Showcase from '../../component/showcase/showcase';
 
-const OfficerHome = ({ toggleOverlay, history }) => {
+const OfficerHome = ({ toggleOverlay, history, currentUser }) => {
+
+    if (!currentUser.isOfficer) {
+        if (currentUser.isDistributor) {
+            history.push('/distributorhome')
+        }
+        else if (currentUser.isAdmin) {
+            history.push('/adminhome')
+        }
+    }
 
     return (
         <div>
@@ -37,8 +46,12 @@ const OfficerHome = ({ toggleOverlay, history }) => {
     )
 }
 
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
     toggleOverlay: () => dispatch(toggleOverlay())
 })
 
-export default withRouter(connect(null, mapDispatchToProps)(OfficerHome));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfficerHome));

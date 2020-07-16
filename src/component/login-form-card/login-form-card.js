@@ -5,6 +5,7 @@ import './login-form-card.css';
 // Oher Component
 import GoogleButton from '../../component/google-button/google-button';
 import FacebookButton from '../../component/facebook-button/facebook-button';
+import { SignInWithGoogle } from '../../firebase/firebase';
 
 const LoginFormCard = () => (
     <div className='login-form-card'>
@@ -19,7 +20,7 @@ const LoginFormCard = () => (
                 <p className='text-primary'>Lupa sandi?</p>
                 <button type='submit' className='button-primary'>Login</button>
             </div>
-            <GoogleButton />
+            <GoogleButton onClick={SignInWithGoogle} />
             <FacebookButton />
         </form>
         <div className='login-form-footer'>

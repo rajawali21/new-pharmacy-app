@@ -35,3 +35,8 @@
     right: 15%;
     bottom: -10%;
 }
+
+.showcase img.fixed {
+    width: 35rem;
+    height: 35rem;
+}

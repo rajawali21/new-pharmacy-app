@@ -1,13 +1,13 @@
 import React from 'react';
 import './showcase.css';
 
-const Showcase = ({ image, title, text }) => (
-    <section className='showcase'>
+const Showcase = ({ image, title, text, color, sizeImage }) => (
+    <section className='showcase' style={{ backgroundColor: color }}>
         <div className='showcase-text'>
             <h1>{title}</h1>
             <p>{text}</p>
         </div>
-        <img src={image} alt='showcaseImage' />
+        <img src={image} alt='showcaseImage' className={sizeImage} />
     </section>
 )
 

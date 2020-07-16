@@ -7,7 +7,7 @@
     z-index: 2;
 }
 
-.header-officer {
+.header-distributor {
     width: 90%;
     height: 100%;
     margin: auto;
@@ -16,35 +16,35 @@
     justify-content: space-between;
 }
 
-.header-officer .left-side {
+.header-distributor .left-side {
     width: 80%;
     height: 100%;
     display: flex;
     justify-content: flex-start;
 }
 
-.header-officer .left-side .header-logo {
-    width: 20%;
+.header-distributor .left-side .header-logo {
+    width: 25%;
     overflow: hidden;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.header-officer .left-side .header-logo img {
+.header-distributor .left-side .header-logo img {
     width: 2rem;
     height: 2rem;
 }
 
-.header-officer .left-side .header-logo h1 {
+.header-distributor .left-side .header-logo h1 {
     font-family: 'Roboto', sans-serif;
-    margin-left: 0.7rem;
+    margin: 0 0.7rem;
     color: #40BCFB;
     font-weight: 400;
     font-size: 1.3rem;
 }
 
-.header-officer .left-side .header-menu {
+.header-distributor .left-side .header-menu {
     width: 75%;
     height: 100%;
     display: flex;
@@ -52,27 +52,27 @@
     align-items: center;
 }
 
-.header-officer .left-side .header-menu .nav-item {
+.header-distributor .left-side .header-menu .nav-item {
     padding: 0.5rem 1.2rem;
     color: #40BCFB;
 }
 
-.header-officer .left-side .header-menu .nav-item.active {
-    background-color: #40BCFB;
+.header-distributor .left-side .header-menu .nav-item.active {
+    background-color: #F48A16;
     color: #fff;
     border-radius: 5px;
 }
 
 
-.header-officer .right-side {
-    width: 40%;
+.header-distributor .right-side {
+    width: 50%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     height: 100%;
 }
 
-.header-officer .right-side .user-info{
+.header-distributor .right-side .user-info{
     cursor: pointer;
     width: 65%;
     display: flex;
@@ -81,7 +81,7 @@
     height: 100%;
 }
 
-.header-officer .right-side .user-info img {
+.header-distributor .right-side .user-info img {
     height: 2.5rem;
     width: 2.5rem;
     border-radius: 50%;
@@ -90,17 +90,17 @@
     border: 1px solid #ccc;
 }
 
-.header-officer .right-side .user-info span {
+.header-distributor .right-side .user-info span {
     color: #7a7878;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
 
-.header-officer .right-side .officer-name {
+.header-distributor .right-side .distributor-name {
     padding-right: 0.4rem;
 }
 
-.header-officer .right-side .arrow-down {
+.header-distributor .right-side .arrow-down {
     padding-bottom: 0.5rem;
 }
 
@@ -116,9 +116,8 @@
     position: absolute;
     top: 4.6rem;
     right: 5%;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
     border-radius: 2px 3px 5px 5px;
-    border: 1px solid #ccc;
 }
 
 .header-option .header-option-item {

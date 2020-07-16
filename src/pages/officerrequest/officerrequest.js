@@ -16,13 +16,23 @@ import { connect } from 'react-redux';
 import { toggleOverlay, toggleRightDetail } from '../../redux/toggle/toggle.action';
 import RightDetail from '../../component/right-detail/right-detail';
 
-const OfficerRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail }) => {
+const OfficerRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, currentUser, history }) => {
+
+    if (!currentUser.isOfficer) {
+        if (currentUser.isDistributor) {
+            history.push('/homedistributor')
+        }
+        else if (currentUser.isAdmin) {
+            history.push('/homeadmin')
+        }
+    }
+
     return (
         <React.Fragment>
             <HeaderOfficer />
             <div className='officer-request'>
                 <div className={`left-side ${stateRightDefail && 'minified'}`}>
-                    <PageHeader onClick={() => toggleOverlay()} />
+                    <PageHeader onClick={() => toggleOverlay()} title='Request' />
                     <SectionSeparator />
                     <TableHeader items={['No', 'Requestor', 'Tanggal', 'Jam', 'Status', 'Detail']} />
                     <TableData onClick={() => toggleRightDetail()} incDetail />
@@ -39,7 +49,8 @@ const OfficerRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail }) 
 }
 
 const mapStateToProps = state => ({
-    stateRightDefail: state.toggle.toggleRightDetail
+    stateRightDefail: state.toggle.toggleRightDetail,
+    currentUser: state.user.currentUser
 })
 
 const mapDispatchToProps = dispatch => ({
