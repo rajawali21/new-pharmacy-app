@@ -1,0 +1,36 @@
+.list-medicine {
+    padding-top: 7rem;
+}
+
+.list-medicine .medicine-form {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.list-medicine .medicine-form h2 {
+    font-family: 'Quicksand';
+    color: #A5A3A3;
+    font-weight: 400;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.list-medicine .medicine-form .input-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-medicine .medicine-form .input-group input {
+    margin: 0 1rem;
+}
+
+.list-medicine .medicine-form .input-group button {
+    background-color: #273A73;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    border: 1px solid #273A73;
+    border-radius: 0.4rem;
+}

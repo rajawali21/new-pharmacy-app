@@ -24,6 +24,7 @@ export const SignInWithGoogle = () => auth.signInWithPopup(provider);
 
 
 export const createOfficer = async (userAuth, additionalData) => {
+
     if (!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -47,6 +48,24 @@ export const createOfficer = async (userAuth, additionalData) => {
             })
         } catch (error) {
             console.error(error)
+        }
+    }
+
+    return userRef;
+}
+
+export const addNewMedicine = async (data) => {
+    const userRef = firestore.collection(`medicine`);
+    const snapShot = await userRef.get();
+
+    if (!snapShot.exists) {
+        try {
+            await userRef.add({
+                name: data.name,
+                quantity: data.quantity
+            })
+        } catch (e) {
+            console.log(e)
         }
     }
 

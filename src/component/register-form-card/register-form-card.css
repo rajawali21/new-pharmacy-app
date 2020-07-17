@@ -36,6 +36,10 @@
     padding-bottom: 1.5rem;
 }
 
+.register-form-card .register-form-body .button-group button {
+    cursor: pointer;
+}
+
 .register-form-card .register-form-footer {
     text-align: center;
     color: #333;

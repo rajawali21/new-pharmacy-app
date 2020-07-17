@@ -8,6 +8,7 @@ import HeaderDistributor from '../../component/header-distributor/header-distrib
 import CustomInput from '../../component/custom-input/custom-input';
 import Footer from '../../component/footer/footer';
 import CustomButton from '../../component/custom-button/custom-button';
+import HeaderAdmin from '../../component/header-admin/header-admin';
 
 const UserSetting = ({ currentUser, history }) => {
 
@@ -27,7 +28,7 @@ const UserSetting = ({ currentUser, history }) => {
         <div>
             {isOfficer && <HeaderOfficer />}
             {isDistributor && <HeaderDistributor />}
-            {isAdmin && <HeaderDistributor />}
+            {isAdmin && <HeaderAdmin />}
             <div className='user-setting'>
                 <div className='user-image'>
                     <img src={photoUrl} alt='UserImage' />

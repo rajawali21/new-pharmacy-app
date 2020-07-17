@@ -45,3 +45,7 @@ a {
   border-radius: 5px;
   margin-bottom: 0.9rem;
 }
+
+button {
+  cursor: pointer;
+}

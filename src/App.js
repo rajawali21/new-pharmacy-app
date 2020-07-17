@@ -17,6 +17,11 @@ import UserSetting from './pages/usersetting/usersetting';
 import Distribution from './pages/distribution/distribution';
 import AdminHome from './pages/adminhome/adminhome';
 import ListAdmin from './pages/listadmin/listadmin';
+import ListOfficer from './pages/listofficer/listofficer';
+import ListDistributor from './pages/listdistributor/listdistributor';
+import Listrequest from './pages/listrequest/listrequest';
+import ListDistribution from './pages/listdistribution/listdistribution';
+import ListMedicine from './pages/listmedicine/listmedicine';
 
 class App extends React.Component {
 
@@ -25,7 +30,7 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser, currentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      console.log(userAuth);
+      console.log('Did Mount');
       if (userAuth) {
         const userRef = await createOfficer(userAuth);
 
@@ -58,6 +63,22 @@ class App extends React.Component {
       <div>
         <Switch>
 
+
+          <Route exact path='/listmedicine' render={
+            (props) => currentUser && <ListMedicine {...props} />
+          } />
+          <Route exact path='/listdistribution' render={
+            (props) => currentUser && <ListDistribution {...props} />
+          } />
+          <Route exact path='/listrequest' render={
+            (props) => currentUser && <Listrequest {...props} />
+          } />
+          <Route exact path='/listdistributor' render={
+            (props) => currentUser && <ListDistributor {...props} />
+          } />
+          <Route exact path='/listofficer' render={
+            (props) => currentUser && <ListOfficer {...props} />
+          } />
           <Route exact path='/listadmin' render={
             (props) => currentUser && <ListAdmin {...props} />
           } />
@@ -80,7 +101,9 @@ class App extends React.Component {
             (props) => currentUser && <UserSetting {...props} />
           } />
           <Route exact path='/roleschecking' component={RolesChecking} />
-          <Route exact path='/register' component={Register} />
+          <Route exact path='/register' render={
+            () => currentUser ? (<Redirect to='/roleschecking' />) : <Register />
+          } />
           <Route exact path='/' render={
             () => currentUser ? (<Redirect to='/roleschecking' />) : <Login />
           } />
