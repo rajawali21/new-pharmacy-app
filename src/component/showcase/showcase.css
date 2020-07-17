@@ -8,6 +8,7 @@
     overflow: hidden;
 }
 
+
 .showcase .showcase-text {
     width: 40%;
     text-align: center;
@@ -39,4 +40,11 @@
 .showcase img.fixed {
     width: 35rem;
     height: 35rem;
+}
+
+.showcase img.right-bottom {
+    width: 42rem;
+    height: 32rem;
+    bottom: -3%;
+
 }

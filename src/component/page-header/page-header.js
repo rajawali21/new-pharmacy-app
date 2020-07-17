@@ -9,8 +9,11 @@ const PageHeader = ({ title, onClick, colorSchema, noAddButton }) => {
         <div className='page-header'>
             <div className='page-title'>
                 <p className='title'>Home {' > '} {title}</p>
-                <div className='line' />
-                <CustomButton color='outline-primary' value={`Add ${title}`} onClick={onClick} />
+                <div className={`line ${noAddButton && 'full'}`} />
+
+                {!noAddButton
+                    ? <CustomButton color='outline-primary' value={`Add ${title}`} onClick={onClick} /> : <div style={{ padding: '2rem 0' }} />
+                }
             </div>
             <div className='page-heading'>
                 <h1>{title} Directory</h1>

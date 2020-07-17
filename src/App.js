@@ -15,6 +15,8 @@ import RolesChecking from './pages/roleschecking/roleschecking';
 import DistributorHome from './pages/distributorhome/distributorhome';
 import UserSetting from './pages/usersetting/usersetting';
 import Distribution from './pages/distribution/distribution';
+import AdminHome from './pages/adminhome/adminhome';
+import ListAdmin from './pages/listadmin/listadmin';
 
 class App extends React.Component {
 
@@ -56,6 +58,12 @@ class App extends React.Component {
       <div>
         <Switch>
 
+          <Route exact path='/listadmin' render={
+            (props) => currentUser && <ListAdmin {...props} />
+          } />
+          <Route exact path='/adminhome' render={
+            (props) => currentUser && <AdminHome {...props} />
+          } />
           <Route exact path='/distribution' render={
             (props) => currentUser && <Distribution {...props} />
           } />
