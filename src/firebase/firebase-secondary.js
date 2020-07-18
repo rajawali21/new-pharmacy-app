@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const config = {
+const otherConfig = {
     apiKey: "AIzaSyDoHiehDHXIW7PPCbHxztdw9emdZivDsDk",
     authDomain: "pharmacy-db-c9def.firebaseapp.com",
     databaseURL: "https://pharmacy-db-c9def.firebaseio.com",
@@ -13,21 +13,16 @@ const config = {
     measurementId: "G-E5V9SKW45R"
 }
 
-firebase.initializeApp(config);
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+const secondaryApp = firebase.initializeApp(otherConfig, "Secondary");
+export const auth2 = secondaryApp.auth();
+export const firestore2 = secondaryApp.firestore();
 
 
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-export const SignInWithGoogle = () => auth.signInWithPopup(provider);
-
-
-export const createOfficer = async (userAuth, additionalData) => {
+export const createOfficer2 = async (userAuth, additionalData) => {
 
     if (!userAuth) return;
 
-    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const userRef = firestore2.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
 
     if (!snapShot.exists) {
@@ -53,11 +48,11 @@ export const createOfficer = async (userAuth, additionalData) => {
 
     return userRef;
 }
-export const createDistributor = async (userAuth, additionalData) => {
+export const createDistributor2 = async (userAuth, additionalData) => {
 
     if (!userAuth) return;
 
-    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const userRef = firestore2.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
 
     if (!snapShot.exists) {
@@ -83,11 +78,11 @@ export const createDistributor = async (userAuth, additionalData) => {
 
     return userRef;
 }
-export const createAdmin = async (userAuth, additionalData) => {
+export const createAdmin2 = async (userAuth, additionalData) => {
 
     if (!userAuth) return;
 
-    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const userRef = firestore2.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
 
     if (!snapShot.exists) {
@@ -115,7 +110,7 @@ export const createAdmin = async (userAuth, additionalData) => {
 }
 
 export const addNewMedicine = async (data) => {
-    const userRef = firestore.collection(`medicine`);
+    const userRef = firestore2.collection(`medicine`);
     const snapShot = await userRef.get();
 
     if (!snapShot.exists) {
@@ -133,7 +128,7 @@ export const addNewMedicine = async (data) => {
 }
 
 export const updateMedicine = async (data) => {
-    const userRef = firestore.doc(`medicine/${data.id}`);
+    const userRef = firestore2.doc(`medicine/${data.id}`);
 
     try {
         await userRef.update({
@@ -148,7 +143,7 @@ export const updateMedicine = async (data) => {
 }
 
 export const deleteMedicine = async (data) => {
-    const userRef = firestore.doc(`medicine/${data.id}`);
+    const userRef = firestore2.doc(`medicine/${data.id}`);
 
     try {
         await userRef.delete();
@@ -165,4 +160,4 @@ export const deleteMedicine = async (data) => {
 
 
 
-export default firebase;
+export default secondaryApp;

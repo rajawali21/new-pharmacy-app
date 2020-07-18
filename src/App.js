@@ -28,7 +28,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, currentUser } = this.props;
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log('Did Mount');
       if (userAuth) {
@@ -40,14 +40,6 @@ class App extends React.Component {
             ...snapShot.data()
           })
         })
-
-        if (currentUser) {
-          if (currentUser.isOfficer) {
-            console.log(currentUser.isOfficer)
-            this.props.history.push('/officerhome')
-          }
-        }
-
       }
       else {
         setCurrentUser(userAuth)

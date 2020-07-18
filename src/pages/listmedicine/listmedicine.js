@@ -22,8 +22,6 @@ const ListMedicine = ({ addMedicine, medicine, removeMedicine }) => {
         async function getData() {
             const userRef = firestore.collection('medicine');
 
-
-
             userRef.onSnapshot(async snap => {
                 const changes = snap.docChanges();
                 console.log(changes);
@@ -40,25 +38,7 @@ const ListMedicine = ({ addMedicine, medicine, removeMedicine }) => {
                     }
                 })
             })
-
-            // userRef.doc('1').set({
-            //     name: 'listen'
-            // })
-            // userRef.doc('1').update({
-            //     name: 'listentoupdate'
-            // })
-            // userRef.doc('1').delete().then(function () {
-            //     console.log("Document successfully deleted!");
-            // }).catch(function (error) {
-            //     console.error("Error removing document: ", error);
-            // });
-
         }
-
-
-
-
-        console.log('this is use effect')
 
         getData();
     }, [addMedicine, removeMedicine])
@@ -121,11 +101,24 @@ const ListMedicine = ({ addMedicine, medicine, removeMedicine }) => {
 
     }
 
+    const [search, setSearch] = React.useState('');
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+
+        setSearch(event.target.value.toLowerCase());
+
+    }
+
     return (
         <div>
             <HeaderAdmin />
             <div className='list-medicine'>
-                <PageHeader title='Medicine' colorSchema='#273B74' buttonColor='outline-blue' noAddButton />
+                <PageHeader title='Medicine'
+                    colorSchema='#273B74'
+                    buttonColor='outline-blue'
+                    onChange={handleSearch}
+                    noAddButton />
                 <SectionSeparator />
                 <form className='medicine-form'>
                     {isEdit ? <h2>Edit Medicine</h2> : <h2>Add Medicine</h2>}
@@ -151,7 +144,7 @@ const ListMedicine = ({ addMedicine, medicine, removeMedicine }) => {
                     </div>
                 </form>
                 <TableHeader items={['No', 'Nama', 'Quantity', 'Details']} />
-                {medicine.map((item, index) => (
+                {medicine.filter(data => data.name.toLowerCase().includes(search)).map((item, index) => (
                     <TableData key={index}>
                         <React.Fragment>
                             <div className='table-data-item'>

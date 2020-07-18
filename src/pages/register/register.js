@@ -21,7 +21,7 @@ const Register = () => {
                     <img src={LoginImage} alt='LoginImage' className='login-image' />
                 </div>
                 <div className='right-side'>
-                    <RegisterFormCard />
+                    <RegisterFormCard isOfficer />
                 </div>
             </main>
             <Footer />

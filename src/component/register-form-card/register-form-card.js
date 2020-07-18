@@ -2,14 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './register-form-card.css';
 import { auth, createOfficer } from '../../firebase/firebase';
+import { auth2, createDistributor2, createAdmin2 } from '../../firebase/firebase-secondary';
 
 // Oher Component
 
-const RegisterFormCard = () => {
+const RegisterFormCard = ({ isOfficer, isAdmin, isDistributor }) => {
 
     const [form, setForm] = React.useState({
         displayName: '',
         email: '',
+        noHp: '',
         password: '',
         confirmPassword: '',
         photoUrl: 'https://firebasestorage.googleapis.com/v0/b/pharmacy-db-c9def.appspot.com/o/user.png?alt=media&token=86125a0a-c596-458e-a74b-5b6ded205658'
@@ -25,7 +27,7 @@ const RegisterFormCard = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const { displayName, email, password, confirmPassword, photoUrl } = form;
+        const { displayName, email, password, confirmPassword, photoUrl, noHp } = form;
 
         if (password !== confirmPassword) {
             alert('Password dan konfirmasi password tidak sama');
@@ -33,34 +35,27 @@ const RegisterFormCard = () => {
         }
 
         try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-            await createOfficer(user, { displayName, photoUrl });
-            setForm({ ...form, displayName: '', email: '', password: '', confirmPassword: '' })
+            if (isOfficer) {
+                const { user } = await auth.createUserWithEmailAndPassword(email, password);
+                await createOfficer(user, { displayName, noHp, photoUrl });
+            }
+            else if (isDistributor) {
+                const { user } = await auth2.createUserWithEmailAndPassword(email, password);
+                await createDistributor2(user, { displayName, noHp, photoUrl });
+                auth2.signOut();
+            }
+            else if (isAdmin) {
+                const { user } = await auth2.createUserWithEmailAndPassword(email, password);
+                await createAdmin2(user, { displayName, noHp, photoUrl });
+                auth2.signOut();
+            }
+            setForm({ ...form, displayName: '', email: '', password: '', confirmPassword: '', noHp: '' })
 
         }
         catch (error) {
             console.error(error);
         }
-        // event.preventDefault();
-        // const { displayName, email, password, confirmPassword, photoUrl } = form;
-
-        // console.log(displayName, photoUrl)
-
-        // if (password !== confirmPassword) {
-        //     alert('Password dan Konfirmasi Password Tidak sesuai');
-        //     return;
-        // }
-
-        // try {
-        //     const { user } = auth.createUserWithEmailAndPassword(email, password);
-
-        //     await createOfficer(user, { displayName });
-        //     setForm({ ...form, displayName: '', email: '', password: '', confirmPassword: '' })
-        // } catch (e) {
-        //     console.error(e)
-        // }
-
     }
 
     return (
@@ -89,6 +84,15 @@ const RegisterFormCard = () => {
                 />
 
                 <input
+                    type='text'
+                    name='noHp'
+                    className='input-100'
+                    placeholder='Silahkan masukan no handphone anda'
+                    value={form.noHp}
+                    onChange={handleChange}
+                />
+
+                <input
                     type='password'
                     name='password'
                     className='input-100'
@@ -111,7 +115,8 @@ const RegisterFormCard = () => {
                 </div>
             </form>
             <div className='register-form-footer'>
-                <p>Sudah punya akun? <Link to='/' className='text-primary'> Login Disini! </Link></p>
+                {isOfficer && <p>Sudah punya akun? <Link to='/' className='text-primary'> Login Disini! </Link></p>}
+
             </div>
         </div>
     )

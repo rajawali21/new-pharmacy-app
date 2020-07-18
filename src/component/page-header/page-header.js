@@ -4,7 +4,7 @@ import './page-header.css';
 // Other Component
 import CustomButton from '../../component/custom-button/custom-button';
 
-const PageHeader = ({ title, onClick, colorSchema, noAddButton, buttonColor }) => {
+const PageHeader = ({ title, onClick, colorSchema, noAddButton, buttonColor, onChange }) => {
     return (
         <div className='page-header'>
             <div className='page-title'>
@@ -20,7 +20,7 @@ const PageHeader = ({ title, onClick, colorSchema, noAddButton, buttonColor }) =
             </div>
             <div className='page-filter'>
                 <form>
-                    <input className='filter-input' type='text' name={`cari${title}`} placeholder={`Search ${title} ...`} />
+                    <input className='filter-input' type='text' name={`cari${title}`} placeholder={`Search ${title} ...`} onChange={onChange} />
                     <button type='button' className='button-icon' style={{ backgroundColor: colorSchema, border: `1px solid ${colorSchema}` }}><i className='fas fa-search'></i> Filter</button>
                 </form>
             </div>

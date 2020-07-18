@@ -1,7 +1,11 @@
 import userActionTypes from './user.types';
+import { checkAdmin, checkOfficer, checkDistributor } from './user.utils';
 
 const INITIAL_STATE = {
-    currentUser: null
+    currentUser: null,
+    admin: [],
+    officer: [],
+    distributor: []
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +15,25 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: action.payload
             }
+
+        case userActionTypes.ADD_ADMIN:
+            return {
+                ...state,
+                admin: checkAdmin(state.admin, action.payload)
+            }
+
+        case userActionTypes.ADD_OFFICER:
+            return {
+                ...state,
+                officer: checkOfficer(state.officer, action.payload)
+            }
+
+        case userActionTypes.ADD_DISTRIBUTOR:
+            return {
+                ...state,
+                distributor: checkDistributor(state.distributor, action.payload)
+            }
+
         default:
             return state;
     }

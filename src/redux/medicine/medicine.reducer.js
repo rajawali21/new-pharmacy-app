@@ -26,6 +26,12 @@ const medicineReducer = (state = INITIAL_STATE, action) => {
                 medicine: removeMedicine(state.medicine, action.payload)
             }
 
+        case medicineActionTypes.SEARCH_MEDICINE:
+            return {
+                ...state,
+                medicine: state.medicine.filter(data => data.name.toLowerCase().includes(action.payload))
+            }
+
         default:
             return state;
     }
