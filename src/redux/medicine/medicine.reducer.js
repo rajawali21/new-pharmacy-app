@@ -1,4 +1,5 @@
 import medicineActionTypes from './medicine.types';
+import { checkMedicine, removeMedicine } from './medicine.utils';
 // import { checkMedicine } from './medicine.utils';
 
 const INITIAL_STATE = {
@@ -16,7 +17,13 @@ const medicineReducer = (state = INITIAL_STATE, action) => {
         case medicineActionTypes.ADD_MEDICINE:
             return {
                 ...state,
-                medicine: [...state.medicine, action.payload]
+                medicine: checkMedicine(state.medicine, action.payload)
+            }
+
+        case medicineActionTypes.REMOVE_MEDICINE:
+            return {
+                ...state,
+                medicine: removeMedicine(state.medicine, action.payload)
             }
 
         default:

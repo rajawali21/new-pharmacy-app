@@ -72,5 +72,33 @@ export const addNewMedicine = async (data) => {
     return userRef;
 }
 
+export const updateMedicine = async (data) => {
+    const userRef = firestore.doc(`medicine/${data.id}`);
+
+    try {
+        await userRef.update({
+            name: data.name,
+            quantity: data.quantity
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
+    return userRef;
+}
+
+export const deleteMedicine = async (data) => {
+    const userRef = firestore.doc(`medicine/${data.id}`);
+
+    try {
+        await userRef.delete();
+    } catch (e) {
+        console.error(e)
+    }
+
+    return userRef;
+
+}
+
 
 export default firebase;

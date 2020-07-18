@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import './listmedicine.css';
 
 // Other Library
-import { addNewMedicine, firestore } from '../../firebase/firebase';
+import { addNewMedicine, firestore, updateMedicine, deleteMedicine } from '../../firebase/firebase';
 import { connect } from 'react-redux';
-import { addMedicine, setMedicine } from '../../redux/medicine/medicine.action';
+import { addMedicine, removeMedicine } from '../../redux/medicine/medicine.action';
 
 // Other Component
 import HeaderAdmin from '../../component/header-admin/header-admin';
@@ -16,40 +16,59 @@ import TableHeader from '../../component/table-header/table-header';
 import TableData from '../../component/table-data/table-data';
 import CustomButton from '../../component/custom-button/custom-button';
 
-const ListMedicine = ({ addMedicine, setMedicine, medicine }) => {
+const ListMedicine = ({ addMedicine, medicine, removeMedicine }) => {
 
     useEffect(() => {
         async function getData() {
             const userRef = firestore.collection('medicine');
-            // const snapShot = await userRef.get();
-            // let medicine = []
-            // snapShot.forEach(doc => {
-            //     medicine.push({
-            //         id: doc.id,
-            //         ...doc.data()
-            //     })
-            // })
-            // setMedicine(medicine)
+
+
 
             userRef.onSnapshot(async snap => {
-                const data = snap.docChanges();
-                console.log(data);
-                data.forEach(change => {
-                    addMedicine(change.doc.data())
+                const changes = snap.docChanges();
+                console.log(changes);
+                changes.forEach(change => {
+                    if (change.type === 'added') {
+                        addMedicine({ id: change.doc.id, ...change.doc.data() })
+                    }
+                    else if (change.type === 'modified') {
+                        addMedicine({ id: change.doc.id, ...change.doc.data() })
+                    }
+                    else if (change.type === 'removed') {
+                        removeMedicine({ id: change.doc.id, ...change.doc.data() });
+
+                    }
                 })
             })
 
+            // userRef.doc('1').set({
+            //     name: 'listen'
+            // })
+            // userRef.doc('1').update({
+            //     name: 'listentoupdate'
+            // })
+            // userRef.doc('1').delete().then(function () {
+            //     console.log("Document successfully deleted!");
+            // }).catch(function (error) {
+            //     console.error("Error removing document: ", error);
+            // });
+
         }
+
+
+
 
         console.log('this is use effect')
 
         getData();
-    }, [addMedicine])
+    }, [addMedicine, removeMedicine])
 
     const [form, setForm] = React.useState({
         name: '',
         quantity: ''
     })
+
+    const [isEdit, setEdit] = React.useState(false)
 
     const handleChange = event => {
         setForm({
@@ -69,14 +88,48 @@ const ListMedicine = ({ addMedicine, setMedicine, medicine }) => {
         }
     }
 
+    const handleEdit = (item) => {
+
+        setEdit(true)
+
+        setForm({
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity
+        })
+
+    }
+
+    const handleUpdate = async (event) => {
+
+        event.preventDefault();
+
+        await updateMedicine(form)
+        // editMedicine(form)
+
+        setEdit(false);
+        setForm({
+            name: '',
+            quantity: ''
+        })
+    }
+
+    const handleDelete = async item => {
+
+        await deleteMedicine(item);
+        // removeMedicine(item)
+
+    }
+
     return (
         <div>
             <HeaderAdmin />
             <div className='list-medicine'>
                 <PageHeader title='Medicine' colorSchema='#273B74' buttonColor='outline-blue' noAddButton />
                 <SectionSeparator />
-                <form className='medicine-form' onSubmit={handleSubmit}>
-                    <h2>Add Medicine</h2>
+                <form className='medicine-form'>
+                    {isEdit ? <h2>Edit Medicine</h2> : <h2>Add Medicine</h2>}
+
                     <div className='input-group'>
                         <CustomInput
                             type='text'
@@ -92,7 +145,9 @@ const ListMedicine = ({ addMedicine, setMedicine, medicine }) => {
                             value={form.quantity}
                             onChange={handleChange}
                         />
-                        <button type='submit' className='non-custom-button'>Add</button>
+
+                        <button type='submit' className='non-custom-button' onClick={isEdit ? handleUpdate : handleSubmit}>{isEdit ? 'Update' : 'Add'}</button>
+
                     </div>
                 </form>
                 <TableHeader items={['No', 'Nama', 'Quantity', 'Details']} />
@@ -109,10 +164,10 @@ const ListMedicine = ({ addMedicine, setMedicine, medicine }) => {
                                 <span>{item.quantity}</span>
                             </div>
                             <div className='table-data-item'>
-                                <CustomButton value='Detail' />
+                                <CustomButton value='Edit' color='outline-primary' onClick={() => handleEdit(item)} />
+                                <CustomButton value='Delete' color='outline-orange' onClick={() => handleDelete(item)} />
                             </div>
                         </React.Fragment>
-
                     </TableData>
                 ))}
             </div>
@@ -127,7 +182,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addMedicine: (medicine) => dispatch(addMedicine(medicine)),
-    setMedicine: (medicine) => dispatch(setMedicine(medicine))
+    removeMedicine: (medicine) => dispatch(removeMedicine(medicine))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListMedicine);

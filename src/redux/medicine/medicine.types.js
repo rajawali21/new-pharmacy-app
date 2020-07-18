@@ -1,6 +1,9 @@
 const medicineActionTypes = {
     SET_MEDICINE: 'SET_MEDICINE',
-    ADD_MEDICINE: 'ADD_MEDICINE'
+    ADD_MEDICINE: 'ADD_MEDICINE',
+    EDIT_MEDICINE: 'EDIT_MEDICINE',
+    LISTEN_TO_DELETE: 'LISTEN_TO_DELETE',
+    REMOVE_MEDICINE: 'REMOVE_MEDICINE'
 }
 
 export default medicineActionTypes;
