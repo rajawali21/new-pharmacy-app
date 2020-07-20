@@ -5,7 +5,8 @@ const INITIAL_STATE = {
     currentUser: null,
     admin: [],
     officer: [],
-    distributor: []
+    distributor: [],
+    selectedUser: null
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +33,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 distributor: checkDistributor(state.distributor, action.payload)
+            }
+
+        case userActionTypes.ADD_SELECTED_USER:
+            return {
+                ...state,
+                selectedUser: action.payload
             }
 
         default:

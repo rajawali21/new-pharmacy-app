@@ -1,5 +1,5 @@
 .right-detail {
-    width: 0;
+    width: 0%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -22,6 +22,10 @@
     overflow: hidden;
     margin: 0 auto;
     padding-bottom: 2rem;
+}
+
+.right-detail .side-header.none {
+    display: none;
 }
 
 .right-detail .side-header img {
@@ -52,4 +56,46 @@
     font-size: 0.5rem;
     color: rgb(194, 55, 45);
     padding-top: 0.8rem;
+}
+
+
+/* Side Contact */
+
+.right-detail .side-contact {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 1rem;
+    font-family: 'Quicksand';
+    color: #333;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.right-detail .side-contact.none {
+    display: none;
+}
+
+.right-detail .side-contact .contact-header {
+    margin-bottom: 0.7rem;
+}
+
+.right-detail .side-contact .contact-items {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+}
+
+.right-detail .side-contact .contact-items .contact-title {
+    width: 40%;
+    text-align: start;
+}
+
+.right-detail .side-contact .contact-items .contact-value {
+    width: 60%;
+    padding-left: 1rem;
+    text-align: justify;
 }

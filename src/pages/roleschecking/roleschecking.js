@@ -10,7 +10,12 @@ const RolesChecking = ({ currentUser, history }) => {
         }
         else {
             if (currentUser.isOfficer) {
-                history.push('/officerhome')
+                if (currentUser.department === false && currentUser.address === false) {
+                    history.push('/editofficerdata')
+                }
+                else {
+                    history.push('/officerhome')
+                }
             }
             else if (currentUser.isDistributor) {
                 history.push('/distributorhome')

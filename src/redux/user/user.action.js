@@ -19,3 +19,8 @@ export const addDistributor = user => ({
     type: userActionTypes.ADD_DISTRIBUTOR,
     payload: user
 })
+
+export const addSelectedUser = user => ({
+    type: userActionTypes.ADD_SELECTED_USER,
+    payload: user
+})

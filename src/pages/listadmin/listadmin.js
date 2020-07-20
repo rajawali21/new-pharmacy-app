@@ -16,9 +16,11 @@ import RegisterFormCard from '../../component/register-form-card/register-form-c
 import { firestore } from '../../firebase/firebase';
 import { connect } from 'react-redux';
 import { addAdmin } from '../../redux/user/user.action';
-import { toggleOverlay } from '../../redux/toggle/toggle.action';
+import { toggleOverlay, toggleRightDetail } from '../../redux/toggle/toggle.action';
+import { addSelectedUser } from '../../redux/user/user.action';
+import RightDetail from '../../component/right-detail/right-detail';
 
-const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay }) => {
+const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay, toggleRightDetail, stateRightDetail, addSelectedUser, selectedUser }) => {
 
     React.useEffect(() => {
         async function getData() {
@@ -53,15 +55,24 @@ const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay }) => {
         setSearch(event.target.value.toLowerCase());
     }
 
+    const handleClick = (data) => {
+        addSelectedUser(data)
+    }
+
     return (
         <div>
             <HeaderAdmin />
-            <div className='list-admin'>
-                <PageHeader title='Admin' colorSchema='#2ecc71' buttonColor='outline-success' onChange={handleSearch} onClick={() => toggleOverlay()} />
-                <SectionSeparator />
-                <CardGroup>
-                    {admin.filter(data => data.displayName.toLowerCase().includes(search)).map((data, index) => <CardUser key={index} data={data} buttonColor='outline-success' />)}
-                </CardGroup>
+            <div className='right-left-container'>
+                <div className={`list-admin ${stateRightDetail && 'minified'}`}>
+                    <PageHeader title='Admin' colorSchema='#2ecc71' buttonColor='outline-success' onChange={handleSearch} onClick={() => toggleOverlay()} />
+                    <SectionSeparator />
+                    <CardGroup>
+                        {admin.filter(data => data.displayName.toLowerCase().includes(search)).map((data, index) => <CardUser key={index} data={data} buttonColor='outline-success' onClick={() => handleClick(data)} userData={selectedUser} />)}
+                    </CardGroup>
+                </div>
+                <RightDetail active>
+                    <SideOverlayHeader />
+                </RightDetail>
             </div>
             <Footer />
 
@@ -84,12 +95,16 @@ const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay }) => {
 
 const mapStateToProps = state => ({
     admin: state.user.admin,
-    stateOverlay: state.toggle.toggleOverlay
+    stateOverlay: state.toggle.toggleOverlay,
+    stateRightDetail: state.toggle.toggleRightDetail,
+    selectedUser: state.user.selectedUser
 })
 
 const mapDispatchToProps = dispatch => ({
     addAdmin: admin => dispatch(addAdmin(admin)),
-    toggleOverlay: () => dispatch(toggleOverlay())
+    toggleOverlay: () => dispatch(toggleOverlay()),
+    addSelectedUser: (user) => dispatch(addSelectedUser(user)),
+    toggleRightDetail: () => dispatch(toggleRightDetail())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListAdmin);

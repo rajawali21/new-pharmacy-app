@@ -22,6 +22,7 @@ import ListDistributor from './pages/listdistributor/listdistributor';
 import Listrequest from './pages/listrequest/listrequest';
 import ListDistribution from './pages/listdistribution/listdistribution';
 import ListMedicine from './pages/listmedicine/listmedicine';
+import EditOfficerData from './pages/editofficerdata/editofficerdata';
 
 class App extends React.Component {
 
@@ -91,6 +92,9 @@ class App extends React.Component {
           } />
           <Route exact path='/usersetting' render={
             (props) => currentUser && <UserSetting {...props} />
+          } />
+          <Route exact path='/editofficerdata' render={
+            (props) => currentUser && <EditOfficerData {...props} />
           } />
           <Route exact path='/roleschecking' component={RolesChecking} />
           <Route exact path='/register' render={

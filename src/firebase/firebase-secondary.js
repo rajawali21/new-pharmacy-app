@@ -35,9 +35,12 @@ export const createOfficer2 = async (userAuth, additionalData) => {
                 displayName: displayName,
                 email: email,
                 photoUrl: photoURL,
-                isAdmin: false,
+                isAdmin: true,
                 isDistributor: false,
-                isOfficer: true,
+                isOfficer: false,
+                department: false,
+                address: false,
+                noHp: false,
                 tanggalDibuat: tanggalDibuat,
                 ...additionalData
             })

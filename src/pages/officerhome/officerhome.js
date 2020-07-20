@@ -24,7 +24,12 @@ const OfficerHome = ({ toggleOverlay, history, currentUser }) => {
         else if (currentUser.isAdmin) {
             history.push('/adminhome')
         }
+    } else if (currentUser.isOfficer) {
+        if (currentUser.department === false || currentUser.address === false || currentUser.noHp === false) {
+            history.push('/editofficerdata')
+        }
     }
+
 
     return (
         <div>

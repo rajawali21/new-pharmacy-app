@@ -4,6 +4,11 @@
     overflow: hidden;
 }
 
+.header-blank.shadow {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    height: 4rem;
+}
+
 .header-blank .container {
     width: 90%;
     height: 100%;

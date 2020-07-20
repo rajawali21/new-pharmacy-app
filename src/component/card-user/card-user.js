@@ -3,7 +3,7 @@ import './card-user.css';
 
 import CustomButton from '../custom-button/custom-button';
 
-const CardUser = ({ buttonColor, data }) => {
+const CardUser = ({ buttonColor, data, onClick }) => {
     return (
         <div className='card-user'>
             <div className='card-user-header'>
@@ -15,7 +15,7 @@ const CardUser = ({ buttonColor, data }) => {
                 <span className='contact-item'>{data.noHp}</span>
             </div>
             <div className='card-user-footer'>
-                <CustomButton color={buttonColor} additionalClass='width-90' value='Details' />
+                <CustomButton type='button' color={buttonColor} onClick={onClick} additionalClass='width-90' value='Details' />
             </div>
         </div>
     )

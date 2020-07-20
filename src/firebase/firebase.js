@@ -43,6 +43,9 @@ export const createOfficer = async (userAuth, additionalData) => {
                 isAdmin: false,
                 isDistributor: false,
                 isOfficer: true,
+                department: false,
+                address: false,
+                noHp: false,
                 tanggalDibuat: tanggalDibuat,
                 ...additionalData
             })
@@ -103,6 +106,9 @@ export const createAdmin = async (userAuth, additionalData) => {
                 isAdmin: true,
                 isDistributor: false,
                 isOfficer: false,
+                department: 'Farmasi',
+                address: false,
+                noHp: false,
                 tanggalDibuat: tanggalDibuat,
                 ...additionalData
             })
