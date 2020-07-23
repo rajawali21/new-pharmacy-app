@@ -11,14 +11,17 @@ import SideOverlayText from '../../component/side-overlay-text/side-overlay-text
 import SideOverlayBlank from '../../component/side-overlay-blank/side-overlay-blank';
 import SideOverlayHeader from '../../component/side-overlay-header/side-overlay-header';
 import RegisterFormCard from '../../component/register-form-card/register-form-card';
+import CustomInput from '../../component/custom-input/custom-input';
 
 // other Library
 import { firestore } from '../../firebase/firebase';
+import { firestore2, auth2 } from '../../firebase/firebase-secondary';
 import { connect } from 'react-redux';
 import { addAdmin } from '../../redux/user/user.action';
 import { toggleOverlay, toggleRightDetail } from '../../redux/toggle/toggle.action';
 import { addSelectedUser } from '../../redux/user/user.action';
 import RightDetail from '../../component/right-detail/right-detail';
+import CustomButton from '../../component/custom-button/custom-button';
 
 const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay, toggleRightDetail, stateRightDetail, addSelectedUser, selectedUser }) => {
 
@@ -47,7 +50,20 @@ const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay, toggleRightDe
         getData();
     }, [addAdmin])
 
+    console.log(auth2.currentUser)
+
+    const [userData, setUserData] = React.useState({
+        displayName: '',
+        email: '',
+        id: '',
+        noHp: '',
+        department: '',
+        address: '',
+        photoUrl: ''
+    })
+
     const [search, setSearch] = React.useState('');
+    const [isEdit, setEdit] = React.useState(false);
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -57,6 +73,65 @@ const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay, toggleRightDe
 
     const handleClick = (data) => {
         addSelectedUser(data)
+    }
+
+    const handleEdit = () => {
+        setEdit(true);
+        setUserData({
+            displayName: selectedUser.displayName,
+            email: selectedUser.email,
+            id: selectedUser.id,
+            noHp: selectedUser.noHp,
+            department: selectedUser.department,
+            address: selectedUser.address,
+            photoUrl: selectedUser.photoUrl
+        })
+    }
+
+    const handleChange = (event) => {
+        setUserData({
+            ...userData,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+
+        const userRef = firestore2.collection('users').doc(userData.id);
+
+        try {
+            await userRef.update({
+                displayName: userData.displayName,
+                noHp: userData.noHp,
+                address: userData.address,
+            })
+        } catch (e) {
+            console.error(e)
+        }
+
+        setEdit(false);
+        addSelectedUser({
+            displayName: userData.displayName,
+            email: userData.email,
+            id: userData.id,
+            noHp: userData.noHp,
+            department: userData.department,
+            address: userData.address,
+            photoUrl: userData.photoUrl
+        })
+    }
+
+    const handleDelete = async (event) => {
+        event.preventDefault();
+
+        const userRef = firestore2.collection('users').doc(userData.id);
+
+        try {
+            await userRef.delete();
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     return (
@@ -70,8 +145,50 @@ const ListAdmin = ({ admin, addAdmin, toggleOverlay, stateOverlay, toggleRightDe
                         {admin.filter(data => data.displayName.toLowerCase().includes(search)).map((data, index) => <CardUser key={index} data={data} buttonColor='outline-success' onClick={() => handleClick(data)} userData={selectedUser} />)}
                     </CardGroup>
                 </div>
+
+
                 <RightDetail active>
                     <SideOverlayHeader />
+                    <form className='input-area' onSubmit={handleSubmit}>
+                        {selectedUser && <div className='button-group'>
+                            <CustomButton
+                                type='button'
+                                value={isEdit ? 'Save' : 'Edit'}
+                                onClick={isEdit ? handleSubmit : handleEdit}
+                            />
+                            <CustomButton
+                                type='button'
+                                value={isEdit ? 'Cancel' : 'Delete'}
+                                color='red'
+                                onClick={isEdit ? () => setEdit(false) : handleDelete}
+                            />
+                        </div>}
+
+
+                        {isEdit && <div className='input-group'>
+                            <CustomInput
+                                name='displayName'
+                                value={userData.displayName}
+                                onChange={handleChange}
+                                type='text'
+                            />
+                            <CustomInput
+                                name='noHp'
+                                value={userData.noHp}
+                                onChange={handleChange}
+                                type='text'
+                            />
+                            <textarea
+                                name='address'
+                                value={userData.address}
+                                onChange={handleChange}
+                                type='text'
+                                rows='4'
+                            />
+                        </div>}
+
+
+                    </form>
                 </RightDetail>
             </div>
             <Footer />

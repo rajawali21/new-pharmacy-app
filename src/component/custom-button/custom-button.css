@@ -54,6 +54,10 @@
   background-color: #fff;
   border: 1px solid #e84118;
 }
+.custom-button.red {
+  color: #fff;
+  background-color: #e84118;
+}
 
 .custom-button.outline-red:hover {
   background-color: #e84118;

@@ -49,3 +49,10 @@ a {
 button {
   cursor: pointer;
 }
+
+.right-left-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}

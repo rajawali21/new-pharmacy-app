@@ -17,3 +17,25 @@
     width: 72%;
     transition: all 400ms ease-in-out;
 }
+
+.input-area {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.input-area .button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.input-area .input-group textarea {
+    width: 100%;
+    border-radius: 0.4rem;
+    border: 1px solid #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #a5a5a5;
+    padding: 0.7rem;
+}

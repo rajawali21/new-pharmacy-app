@@ -18,6 +18,7 @@ export const auth2 = secondaryApp.auth();
 export const firestore2 = secondaryApp.firestore();
 
 
+
 export const createOfficer2 = async (userAuth, additionalData) => {
 
     if (!userAuth) return;
@@ -102,6 +103,9 @@ export const createAdmin2 = async (userAuth, additionalData) => {
                 isDistributor: false,
                 isOfficer: false,
                 tanggalDibuat: tanggalDibuat,
+                noHp: null,
+                address: null,
+                department: 'Farmasi',
                 ...additionalData
             })
         } catch (error) {

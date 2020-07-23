@@ -3,7 +3,7 @@ import './right-detail.css';
 
 import { connect } from 'react-redux';
 
-const RightDetail = ({ children, image, active, selectedUser }) => (
+const RightDetail = ({ children, active, selectedUser }) => (
     <aside className={`right-detail ${active && 'active'}`}>
         <div className={`side-header ${!selectedUser && 'none'}`}>
             <img src={selectedUser && selectedUser.photoUrl} alt='sideHeaderImg' />
@@ -32,6 +32,8 @@ const RightDetail = ({ children, image, active, selectedUser }) => (
                 <span className='contact-value'>{selectedUser && selectedUser.address}</span>
             </div>
         </div>
+
+        {children}
     </aside>
 )
 
