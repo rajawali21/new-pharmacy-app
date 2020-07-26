@@ -1,6 +1,6 @@
 .list-officer {
-    padding-top: 7rem;
+    height: 100%;
     width: 72%;
-    min-height: 100%;
+    padding-top: 6rem;
     border-right: 1px solid #ccc;
 }

@@ -5,6 +5,7 @@
     flex-direction: column;
     padding-top: 1rem;
     overflow: scroll;
+    padding-top: 6rem;
 }
 
 .right-detail.active {
