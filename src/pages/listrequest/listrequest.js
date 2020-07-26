@@ -63,7 +63,7 @@ const ListRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, curre
 
     }
 
-    const [selectedRequest, setSelectedRequest] = React.useState()
+    const [selectedRequest, setSelectedRequest] = React.useState({ items: [] })
 
     const handleRightDetail = (data) => {
         addSelectedUser(data.user);
@@ -136,7 +136,7 @@ const ListRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, curre
                 }
             </div>
             <RequestOverlay />
-            <Footer isAbsolute />
+            <Footer />
         </React.Fragment>
     )
 }
