@@ -1,10 +1,10 @@
 import React from 'react';
 import './side-overlay-blank.css';
 
-const SideOverlayBlank = ({ children }) => (
-    <div className='side-overlay-blank'>
+const SideOverlayBlank = ({ children, ...otherProps }) => (
+    <form className='side-overlay-blank' {...otherProps}>
         {children}
-    </div>
+    </form>
 )
 
 export default SideOverlayBlank;

@@ -1,6 +1,6 @@
 .right-detail {
     width: 0%;
-    overflow: hidden;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     padding-top: 7rem;
@@ -8,6 +8,11 @@
 }
 
 .right-detail.active {
+    width: 28%;
+    transition: all 400ms ease-in-out;
+}
+
+.right-detail.active-big {
     width: 28%;
     transition: all 400ms ease-in-out;
 }

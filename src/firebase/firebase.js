@@ -120,13 +120,16 @@ export const createAdmin = async (userAuth, additionalData) => {
     return snapShot;
 }
 
+
+// Medicne CRUD
+
 export const addNewMedicine = async (data) => {
-    const userRef = firestore.collection(`medicine`);
-    const snapShot = await userRef.get();
+    const medicineRef = firestore.collection(`medicine`);
+    const snapShot = await medicineRef.get();
 
     if (!snapShot.exists) {
         try {
-            await userRef.add({
+            await medicineRef.add({
                 name: data.name,
                 quantity: data.quantity
             })
@@ -135,14 +138,14 @@ export const addNewMedicine = async (data) => {
         }
     }
 
-    return userRef;
+    return medicineRef;
 }
 
 export const updateMedicine = async (data) => {
-    const userRef = firestore.doc(`medicine/${data.id}`);
+    const medicineRef = firestore.doc(`medicine/${data.id}`);
 
     try {
-        await userRef.update({
+        await medicineRef.update({
             name: data.name,
             quantity: data.quantity
         })
@@ -150,25 +153,40 @@ export const updateMedicine = async (data) => {
         console.log(e)
     }
 
-    return userRef;
+    return medicineRef;
 }
 
 export const deleteMedicine = async (data) => {
-    const userRef = firestore.doc(`medicine/${data.id}`);
+    const medicineRef = firestore.doc(`medicine/${data.id}`);
 
     try {
-        await userRef.delete();
+        await medicineRef.delete();
     } catch (e) {
         console.error(e)
     }
 
-    return userRef;
+    return medicineRef;
 
 }
 
 
-// Admin List
+// Request CRUD
+export const addNewRequest = async (data) => {
+    const requestRef = firestore.collection('request');
 
+    try {
+        const tanggalRequest = new Date();
+        await requestRef.add({
+            items: data.items,
+            tanggalRequest: tanggalRequest,
+            status: '1',
+            user: data.user
+        })
+
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 
 export default firebase;

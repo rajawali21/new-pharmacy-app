@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './request-overlay.css';
 
 // Redux
 import { connect } from 'react-redux';
 import { toggleOverlay } from '../../redux/toggle/toggle.action';
+// import { addMedicine } from '../../redux/medicine/medicine.action';
 
 // Library
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { firestore, addNewRequest } from '../../firebase/firebase';
+import { withRouter } from 'react-router-dom';
 
 // Other Components
 import FullscreenOverlay from '../../component/fullscreen-overlay/fullscreen-overlay';
@@ -19,38 +22,75 @@ import CustomInput from '../../component/custom-input/custom-input';
 import FormGroup from '../../component/form-group/form-group';
 import CustomButton from '../../component/custom-button/custom-button';
 
-const RequestOverlay = ({ stateOverlay, toggleOverlay }) => {
+const RequestOverlay = ({ stateOverlay, currentUser, history, toggleOverlay }) => {
 
     const animatedComponents = makeAnimated();
-    const options = [
-        { value: 'null', label: 'Silahkan pilih obat' },
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ];
+    const [listMedicine, setListMedicine] = useState([])
+
+
+    useEffect(() => {
+        async function getData() {
+            const medicineRef = firestore.collection('medicine');
+            const medicines = [];
+            medicineRef.onSnapshot(async snap => {
+                const changes = snap.docChanges();
+                changes.forEach(change => {
+                    medicines.push({ id: change.doc.id, value: change.doc.data().name, label: change.doc.data().name, quantity: change.doc.data().quantity })
+                })
+                setListMedicine(medicines.filter(data => data.quantity !== 0))
+            })
+        }
+
+        getData()
+    }, [])
+
+
+    const options = listMedicine;
 
     const [request, setRequest] = useState({
-        id: '',
-        officer: '',
-        items: [{ obat: '', jumlah: '' }]
+        items: [{ id: '', obat: '', jumlah: '', max: '', approved: '' }],
+        user: {
+            id: currentUser.id,
+            displayName: currentUser.displayName,
+            photoUrl: currentUser.photoUrl,
+            address: currentUser.address,
+            noHp: currentUser.noHp,
+            email: currentUser.email,
+            department: currentUser.department
+        }
     })
 
     const handleChange = (e) => {
 
+
         let items = [...request.items];
-        items[e.target.dataset.id]['jumlah'] = e.target.value.toUpperCase()
+        if (parseInt(e.target.value) > parseInt(items[e.target.dataset.id]['max'])) {
+            console.log(parseInt(e.target.value) > parseInt(items[e.target.dataset.id]['max']));
+            e.target.value = items[e.target.dataset.id]['max'];
+        }
+        items[e.target.dataset.id]['jumlah'] = e.target.value
         setRequest({ ...request, items })
     }
 
     const handleSelectChange = (data, property) => {
         let items = [...request.items];
-        items[property.name]['obat'] = data.value
-        setRequest({ ...request, items })
+
+        const existingObat = items.find(item => item.obat === data.value);
+
+        if (existingObat) {
+            alert('Obat sudah dipilih');
+        } else {
+            items[property.name]['obat'] = data.value;
+            items[property.name]['id'] = data.id;
+        }
+
+        items[property.name]['max'] = data.quantity;
+        setRequest({ ...request, items });
     }
 
     const addForm = () => {
         let item = [...request.items];
-        setRequest({ ...request, items: [...item, { obat: '', jumlah: '' }] })
+        setRequest({ ...request, items: [...item, { obat: '', jumlah: '', max: '', approved: '' }] })
     }
 
     const handleRemove = (index) => {
@@ -58,6 +98,29 @@ const RequestOverlay = ({ stateOverlay, toggleOverlay }) => {
         items.splice(index, 1)
 
         setRequest({ ...request, items })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            await addNewRequest(request);
+            setRequest({
+                items: [{ id: '', obat: '', jumlah: '', max: '', approved: '' }],
+                user: {
+                    id: currentUser.id,
+                    displayName: currentUser.displayName,
+                    photoUrl: currentUser.photoUrl,
+                    address: currentUser.address,
+                    noHp: currentUser.noHp,
+                    email: currentUser.email,
+                    department: currentUser.department
+                }
+            })
+            toggleOverlay();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -70,7 +133,7 @@ const RequestOverlay = ({ stateOverlay, toggleOverlay }) => {
                     bgcolor='40BCFB'
                     color='fff'
                 />
-                <SideOverlayBlank>
+                <SideOverlayBlank onSubmit={handleSubmit}>
                     <SideOverlayHeader />
                     <FormContainerScrollable>
                         {request.items.map((item, index) => (
@@ -88,11 +151,11 @@ const RequestOverlay = ({ stateOverlay, toggleOverlay }) => {
                                     />
                                     <CustomInput
                                         type='number'
-                                        placeholder='Silahkan masukan jumlah'
+                                        placeholder={item.max === '' ? 'Silahkan Pilih Obat' : `Stok Saat Ini ${item.max}`}
                                         className='jumlah custom-input'
                                         onChange={handleChange}
                                         data-id={index}
-                                        value={item.jumlah}
+                                        value={item.jumlah !== '' && item.jumlah}
                                     />
                                 </div>
                             </FormGroup>
@@ -109,11 +172,12 @@ const RequestOverlay = ({ stateOverlay, toggleOverlay }) => {
 }
 
 const mapStateToProps = state => ({
-    stateOverlay: state.toggle.toggleOverlay
+    stateOverlay: state.toggle.toggleOverlay,
+    currentUser: state.user.currentUser
 })
 
-const mapDispatchToProps = dispatch => ({
-    toggleOverlay: () => dispatch(toggleOverlay())
+const mapDispatchToProps = disptach => ({
+    toggleOverlay: () => disptach(toggleOverlay())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(RequestOverlay);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RequestOverlay));

@@ -5,12 +5,16 @@ export const addMedicine = medicine => ({
     payload: medicine
 })
 
-export const removeMedicine = medicine => ({
-    type: medicineActionTypes.REMOVE_MEDICINE,
+export const addOptionMedicine = medicine => ({
+    type: medicineActionTypes.ADD_OPTION_MEDICINE,
+    payload: medicine
+})
+export const removeOptionMedicine = medicine => ({
+    type: medicineActionTypes.REMOVE_OPTION_MEDICINE,
     payload: medicine
 })
 
-export const searchMedicine = medicine => ({
-    type: medicineActionTypes.SEARCH_MEDICINE,
+export const removeMedicine = medicine => ({
+    type: medicineActionTypes.REMOVE_MEDICINE,
     payload: medicine
 })
