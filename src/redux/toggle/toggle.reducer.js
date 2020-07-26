@@ -16,7 +16,7 @@ const toggleReducer = (state = INITIAL_STATE, action) => {
         case toggleActionTypes.TOGGLE_RIGHT_DETAIL:
             return {
                 ...state,
-                toggleRightDetail: !state.toggleRightDetail
+                toggleRightDetail: action.payload ? true : !state.toggleRightDetail
             }
 
         default:

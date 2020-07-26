@@ -5,5 +5,6 @@ export const toggleOverlay = overlay => ({
 })
 
 export const toggleRightDetail = rightDetail => ({
-    type: toggleActionTypes.TOGGLE_RIGHT_DETAIL
+    type: toggleActionTypes.TOGGLE_RIGHT_DETAIL,
+    payload: rightDetail
 })

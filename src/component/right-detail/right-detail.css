@@ -3,7 +3,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-top: 7rem;
+    padding-top: 1rem;
     overflow: scroll;
 }
 
@@ -75,6 +75,7 @@
     color: #333;
     padding-bottom: 1rem;
     border-bottom: 1px solid #ccc;
+    overflow: hidden;
 }
 
 .right-detail .side-contact.none {

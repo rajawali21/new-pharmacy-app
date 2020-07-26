@@ -55,12 +55,12 @@ const OfficerRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, cu
         getData();
     }, [addRequest, currentUser.id, removeRequest])
 
-    const [selectedRequest, setSelectedRequest] = React.useState()
+    const [selectedRequest, setSelectedRequest] = React.useState({ items: [] })
 
     const handleRightDetail = (data) => {
         addSelectedUser(data.user);
         setSelectedRequest(data)
-        toggleRightDetail();
+        toggleRightDetail(true);
     }
 
 
@@ -106,7 +106,7 @@ const OfficerRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, cu
                     <RightDetail active={stateRightDefail}>
                         <TableHeader items={['No', 'Obat', 'Jumlah', 'Approved']} />
                         {selectedRequest.items.map((data, index) => (
-                            <TableData>
+                            <TableData key={index}>
                                 <React.Fragment>
                                     <div style={{ width: '5%' }} className='table-data-item'>
                                         <span>{index + 1}</span>
@@ -142,7 +142,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     toggleOverlay: () => dispatch(toggleOverlay()),
-    toggleRightDetail: () => dispatch(toggleRightDetail()),
+    toggleRightDetail: (data) => dispatch(toggleRightDetail(data)),
     addRequest: request => dispatch(addRequest(request)),
     removeRequest: request => dispatch(removeRequest(request)),
     addSelectedUser: user => dispatch(addSelectedUser(user))
