@@ -1,0 +1,21 @@
+.footer {
+    margin-top: 1rem;
+    font-family: 'Roboto', sans-serif;
+    color: #9c9b9b;
+    background-color: #fff;
+    font-weight: 500;
+    border-top: 1px solid #ccc;
+    height: 3.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.footer.absolute {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

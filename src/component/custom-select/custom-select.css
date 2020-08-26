@@ -1,0 +1,19 @@
+.custom-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.custom-select.three {
+    width: 30%;
+    padding: 4px 10px;
+    border-radius: 0;
+}
+
+.custom-select.five {
+    width: 50%;
+    padding: 4px 10px;
+    border-radius: 0;
+}

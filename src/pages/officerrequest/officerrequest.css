@@ -1,0 +1,21 @@
+.officer-request {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.officer-request .left-side {
+    width: 100%;
+    min-height: 100vh;
+    border-right: 1px solid #ccc;
+    padding-top: 6rem;
+    transition: all 400ms ease-in-out;
+}
+
+.officer-request .left-side.minified {
+    width: 55%;
+    transition: all 400ms ease-in-out;
+}
+
+

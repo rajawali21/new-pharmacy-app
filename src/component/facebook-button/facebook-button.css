@@ -1,0 +1,46 @@
+
+ .facebook-btn {
+	 width: 90%;
+	 height: 3rem;
+	 background: rgb(60, 90, 154) ;
+	 margin: 0 auto;
+	 margin-top: 20px;
+	 border-radius: 2px;
+	 box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
+	 display: flex;
+	 flex-direction: row;
+}
+ .facebook-btn .facebook-icon-wrapper {
+	 margin-top: 1px;
+	 margin-left: 1px;
+	 width: 15%;
+	 height: 94%;
+	 border-radius: 2px;
+	 background-color: #fff;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+}
+ .facebook-btn .facebook-icon {
+	 width: 18px;
+	 height: 18px;
+}
+
+ .facebook-btn .btn-text {
+	 width: 85%;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 text-align: center;
+	 color: #fff;
+	 font-size: 14px;
+	 letter-spacing: 0.2px;
+	 font-family: "Roboto";
+}
+ .facebook-btn:hover {
+	background: rgb(60, 90, 154);
+}
+ .facebook-btn:active {
+	 background: #1669f2;
+}
+ 

@@ -1,0 +1,65 @@
+.page-header {
+    width: 90%;
+    margin: auto;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header .page-title {
+    display: flex;
+    padding-bottom: 2rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    color: #333;
+}
+
+.page-header .page-title .title {
+    width: 15%;
+    font-weight: 400;
+    font-family: 'Roboto' sans-serif;
+    color: #a5a3a3;
+}
+
+.page-header .page-title .line {
+    height: 1px;
+    background-color: #ccc;
+    width: 85%;
+    margin: 0 10px;
+}
+
+.page-header .page-title button {
+    width: 20%;
+}
+
+.page-header .page-heading {
+    color: #a5a3a3;
+    font-family: 'Quicksand';
+    padding-bottom: 3rem;
+}
+
+.page-header .page-heading h1 {
+    font-weight: 400;
+}
+
+
+.page-header .page-filter form  {
+    width: 100%;
+}
+
+.page-header .page-filter form .filter-input {
+    width: 80%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    color: #a5a3a3;
+    font-family: 'Quickand';
+}
+
+.page-header .page-filter form button {
+    width: 20%;
+    padding: 0.8rem 1rem;
+    background-color: #40BCFB;
+    color: #fff;
+    border: 1px solid #40BCFB;
+}

@@ -1,0 +1,52 @@
+.list-department {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.list-department .left-side {
+    width: 100%;
+    min-height: 100vh;
+    border-right: 1px solid #ccc;
+    transition: all 400ms ease-in-out;
+}
+
+.list-department .left-side.minified {
+    width: 55%;
+    transition: all 400ms ease-in-out;
+}
+
+
+.list-department .department-form {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.list-department .department-form h2 {
+    font-family: 'Quicksand';
+    color: #A5A3A3;
+    font-weight: 400;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.list-department .department-form .input-group {
+    display: flex;
+    flex-direction: row;
+}
+
+.list-department .department-form .input-group input {
+    margin: 0 1rem;
+}
+
+.list-department .department-form .input-group button {
+    background-color: #40BCFB;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    border: 1px solid #40BCFB;
+    border-radius: 0.4rem;
+}
