@@ -3,14 +3,14 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyDoHiehDHXIW7PPCbHxztdw9emdZivDsDk",
-    authDomain: "pharmacy-db-c9def.firebaseapp.com",
-    databaseURL: "https://pharmacy-db-c9def.firebaseio.com",
-    projectId: "pharmacy-db-c9def",
-    storageBucket: "pharmacy-db-c9def.appspot.com",
-    messagingSenderId: "63044515864",
-    appId: "1:63044515864:web:4fbb3d710521a8c0bf2b6d",
-    measurementId: "G-E5V9SKW45R"
+    apiKey: "AIzaSyA-Iv42o5yzmPQSBUNTZnnV1WLkLDJTUmQ",
+    authDomain: "aplikasi-farmasi-642ed.firebaseapp.com",
+    databaseURL: "https://aplikasi-farmasi-642ed.firebaseio.com",
+    projectId: "aplikasi-farmasi-642ed",
+    storageBucket: "aplikasi-farmasi-642ed.appspot.com",
+    messagingSenderId: "285078631926",
+    appId: "1:285078631926:web:4e11e8d97330f07c0803d7",
+    measurementId: "G-Q1Z0NH0T2J"
 }
 
 firebase.initializeApp(config);
