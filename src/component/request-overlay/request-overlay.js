@@ -105,33 +105,40 @@ const RequestOverlay = ({ stateOverlay, currentUser, history, toggleOverlay }) =
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        request.items.find(async data => {
+        const invalidItem = request.items.find(data => {
+            let alerts;
             if (!data.jumlah) {
-                alert('Silahkan Lengkapi Form')
+                alert('Silahkan Lengkapi Form');
+                alerts = true;
             } else if (data.jumlah === 0) {
-                alert('Jumlah Tidak Boleh 0')
-            } else {
-                try {
-                    await addNewRequest(request);
-                    setRequest({
-                        items: [],
-                        isApproved: true,
-                        user: {
-                            id: currentUser.id,
-                            displayName: currentUser.displayName,
-                            photoUrl: currentUser.photoUrl,
-                            address: currentUser.address,
-                            noHp: currentUser.noHp,
-                            email: currentUser.email,
-                            department: currentUser.department
-                        }
-                    })
-                    toggleOverlay();
-                } catch (error) {
-                    alert(error.message);
-                }
+                alert('Data Tidak Boleh Kosong');
+                alerts = true;
             }
+
+            return alerts;
         })
+
+        if (!invalidItem) {
+            try {
+                await addNewRequest(request);
+                setRequest({
+                    items: [],
+                    isApproved: true,
+                    user: {
+                        id: currentUser.id,
+                        displayName: currentUser.displayName,
+                        photoUrl: currentUser.photoUrl,
+                        address: currentUser.address,
+                        noHp: currentUser.noHp,
+                        email: currentUser.email,
+                        department: currentUser.department
+                    }
+                })
+                toggleOverlay();
+            } catch (error) {
+                alert(error.message);
+            }
+        }
 
 
     }
