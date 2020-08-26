@@ -14,15 +14,6 @@ import SectionSeparator from '../../component/section-separator/section-separato
 
 const OfficerRequestPrint = ({ currentUser, history, match, selectRequest, selectedRequest }) => {
 
-    if (!currentUser.isOfficer) {
-        if (currentUser.isDistributor) {
-            history.push('/homedistributor')
-        }
-        else if (currentUser.isAdmin) {
-            history.push('/homeadmin')
-        }
-    }
-
     React.useEffect(() => {
         async function getData() {
             const requestRef = firestore.collection('request').doc(match.params.reqId);

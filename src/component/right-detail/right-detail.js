@@ -6,7 +6,7 @@ import CustomButton from '../custom-button/custom-button';
 import { toggleRightDetail } from '../../redux/toggle/toggle.action';
 
 
-const RightDetail = ({ children, active, selectedUser, bigger, withButton, handleClick, title, toggleRightDetail, noPaddingTop }) => (
+const RightDetail = ({ children, active, selectedUser, bigger, withButton, handleClick, title, toggleRightDetail, noPaddingTop, withPrint, handlePrint }) => (
     <aside className={`right-detail ${active && 'active'} ${bigger && 'bigger'} ${noPaddingTop && 'paddingless'}`}>
         <h1 style={{ textAlign: 'center', color: '#A5A3A8', marginBottom: '3rem' }}>{title}</h1>
         <div className={`side-header ${!selectedUser && 'none'}`}>
@@ -41,9 +41,14 @@ const RightDetail = ({ children, active, selectedUser, bigger, withButton, handl
 
         {withButton &&
             <div className='other-props'>
+                {withPrint &&
+                    <CustomButton color='blue' value='Print' style={{ width: "20%" }} onClick={handlePrint} />
+                }
+
                 <CustomButton color='blue' value={withButton} style={{ width: "20%" }} onClick={handleClick} />
             </div>
         }
+
 
         <span className='close' onClick={() => toggleRightDetail()}>&#10005;</span>
 

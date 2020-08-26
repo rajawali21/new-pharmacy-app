@@ -205,7 +205,10 @@ const ListRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, curre
 
     const { isApproved } = selectedRequest;
 
-
+    const handlePrint = () => {
+        toggleRightDetail(false);
+        history.push(`officerrequestprint/${selectedRequest.id}`);
+    }
 
     return (
         <React.Fragment>
@@ -246,7 +249,7 @@ const ListRequest = ({ toggleOverlay, toggleRightDetail, stateRightDefail, curre
                     })}
                 </div>
                 {selectedUser &&
-                    <RightDetail active={stateRightDefail} bigger withButton={isApproved ? 'Update' : 'Approve'} handleClick={isApproved ? handleUpdate : handleApprove}>
+                    <RightDetail active={stateRightDefail} bigger withButton={isApproved ? 'Update' : 'Approve'} handleClick={isApproved ? handleUpdate : handleApprove} withPrint handlePrint={handlePrint}>
                         <TableHeader items={['No', 'Obat', 'Jumlah Request', 'Approved']} />
                         {selectedRequest.items.map((data, index) => (
                             <TableData key={index}>
