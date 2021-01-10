@@ -22,7 +22,6 @@ const AdminHome = ({ history }) => {
                 <RequestButtonGroup>
                     <RequestButton value='Data Admin' icon='fas fa-users-cog' onClick={() => history.push('/listadmin')} />
                     <RequestButton value='Data Petugas' icon='fas fa-hospital-user' onClick={() => history.push('/listofficer')} />
-                    <RequestButton value='Data Distibutor' icon='fas fa-people-arrows' onClick={() => history.push('/listdistributor')} />
                 </RequestButtonGroup>
                 <RequestButtonGroup>
                     <RequestButton value='List Obat' icon='fas fa-tablets' onClick={() => history.push('/listmedicine')} />

@@ -7,7 +7,10 @@ import SectionSeparator from '../../component/section-separator/section-separato
 import CardGroup from '../../component/card-group/card-group';
 import CardUser from '../../component/card-user/card-user';
 import SideOverlayHeader from '../../component/side-overlay-header/side-overlay-header';
-
+import FullscreenOverlay from '../../component/fullscreen-overlay/fullscreen-overlay';
+import SideOverlayText from '../../component/side-overlay-text/side-overlay-text';
+import SideOverlayBlank from '../../component/side-overlay-blank/side-overlay-blank';
+import RegisterFormCard from '../../component/register-form-card/register-form-card';
 import { connect } from 'react-redux';
 import { addOfficer, addSelectedUser } from '../../redux/user/user.action';
 import { toggleOverlay } from '../../redux/toggle/toggle.action';
@@ -17,7 +20,7 @@ import CustomButton from '../../component/custom-button/custom-button';
 import CustomInput from '../../component/custom-input/custom-input';
 import RightDetail from '../../component/right-detail/right-detail';
 
-const ListOfficer = ({ addOfficer, officer, addSelectedUser, selectedUser }) => {
+const ListOfficer = ({ addOfficer, officer, addSelectedUser, selectedUser, stateOverlay, toggleOverlay }) => {
 
     React.useEffect(() => {
         async function getData() {
@@ -44,7 +47,6 @@ const ListOfficer = ({ addOfficer, officer, addSelectedUser, selectedUser }) => 
         getData();
     }, [addOfficer])
 
-    const [search, setSearch] = React.useState('');
     const [isEdit, setEdit] = React.useState(false);
 
 
@@ -60,12 +62,6 @@ const ListOfficer = ({ addOfficer, officer, addSelectedUser, selectedUser }) => 
 
     const handleClick = (data) => {
         addSelectedUser(data)
-    }
-
-    const handleSearch = (event) => {
-        event.preventDefault();
-
-        setSearch(event.target.value.toLowerCase());
     }
 
     const handleEdit = () => {
@@ -132,10 +128,11 @@ const ListOfficer = ({ addOfficer, officer, addSelectedUser, selectedUser }) => 
             <HeaderAdmin />
             <div className='right-left-container'>
                 <div className='list-officer'>
-                    <PageHeader title='Officer' buttonColor='outline-primary' onChange={handleSearch} noAddButton />
+                    <PageHeader title='Officer' buttonColor='outline-primary' onClick={() => toggleOverlay()}/>
                     <SectionSeparator />
                     <CardGroup>
-                        {officer.filter(data => data.displayName.toLowerCase().includes(search)).map((data, index) => <CardUser key={index} data={data} buttonColor='outline-success' onClick={() => handleClick(data)} userData={selectedUser} />)}
+                        {officer
+                        .map((data, index) => <CardUser key={index} data={data} buttonColor='outline-success' onClick={() => handleClick(data)} userData={selectedUser} />)}
                     </CardGroup>
                 </div>
 
@@ -184,6 +181,20 @@ const ListOfficer = ({ addOfficer, officer, addSelectedUser, selectedUser }) => 
                 </RightDetail>
             </div>
             <Footer />
+
+            <FullscreenOverlay active={stateOverlay}>
+                <SideOverlayText
+                    header='Form Tambah Petugas'
+                    text='Silahkan isi form di samping ini, untuk menambah admin'
+                    footer='Pastikan isi form berikut dengan benar, agar tidak terjadi kesalah pahaman'
+                    bgcolor='31CC70'
+                    color='fff'
+                />
+                <SideOverlayBlank>
+                    <SideOverlayHeader />
+                    <RegisterFormCard isOfficer/>
+                </SideOverlayBlank>
+            </FullscreenOverlay>
         </div>
     )
 }

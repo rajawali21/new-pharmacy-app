@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './register-form-card.css';
 import { auth, createOfficer } from '../../firebase/firebase';
 import { auth2, createDistributor2, createAdmin2 } from '../../firebase/firebase-secondary';
@@ -110,14 +109,10 @@ const RegisterFormCard = ({ isOfficer, isAdmin, isDistributor }) => {
                     onChange={handleChange}
                 />
 
-                <div className='button-group'>
+                <div className='button-group' style={{marginTop: "30px"}}>
                     <button type='submit' className='button-primary' value='Register'>Register</button>
                 </div>
             </form>
-            <div className='register-form-footer'>
-                {isOfficer && <p>Sudah punya akun? <Link to='/' className='text-primary'> Login Disini! </Link></p>}
-
-            </div>
         </div>
     )
 }

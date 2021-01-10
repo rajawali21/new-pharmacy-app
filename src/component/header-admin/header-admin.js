@@ -36,11 +36,9 @@ const HeaderAdmin = ({ history, currentUser }) => {
                         <NavLink exact to='/adminhome' className='nav-item' activeClassName='active'>Home</NavLink>
                         <NavLink exact to='/listadmin' className='nav-item' activeClassName='active'>Admin</NavLink>
                         <NavLink exact to='/listofficer' className='nav-item' activeClassName='active'>Petugas</NavLink>
-                        <NavLink exact to='/listdistributor' className='nav-item' activeClassName='active'>Distributor</NavLink>
                         <NavLink exact to='/listdepartment' className='nav-item' activeClassName='active'>Department</NavLink>
                         <NavLink exact to='/listmedicine' className='nav-item' activeClassName='active'>Obat</NavLink>
                         <NavLink exact to='/listrequest' className='nav-item' activeClassName='active'>Request</NavLink>
-                        <NavLink exact to='/listdistribution' className='nav-item' activeClassName='active'>Distribusi</NavLink>
                     </div>
                 </div>
                 <div className='right-side'>
